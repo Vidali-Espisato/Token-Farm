@@ -34,6 +34,15 @@ contract TokenFarm {
         hasStaked[msg.sender] = true;
     }
 
+    function unstakeTokens() public {
+        uint balance = stakingBalance[msg.sender];
+        require(balance > 0, "staked balance must be greater than 0.");
+
+        daiToken.transfer(msg.sender, balance);
+        stakingBalance[msg.sender] = 0;
+        isStaking[msg.sender] = false;
+    }
+
     function issueTokens() public {
         require(msg.sender == owner, "UnAuthorized");
 
