@@ -9,6 +9,7 @@ export default class Main extends Component {
           <thead>
             <tr>
               <th scope="col">Staking Balance</th>
+              <th scope="col"></th>
               <th scope="col">Reward Balance</th>
             </tr>
           </thead>
@@ -17,6 +18,17 @@ export default class Main extends Component {
               <td>
                 {window.web3.utils.fromWei(this.props.stakingBalance, "Ether")}{" "}
                 mDAI
+              </td>
+              <td>
+                <button
+                  className="btn btn-warning text-white"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    this.props.unStakeTokens();
+                  }}
+                >
+                  Un-stake
+                </button>
               </td>
               <td>
                 {window.web3.utils.fromWei(

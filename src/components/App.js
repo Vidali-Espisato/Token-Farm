@@ -95,6 +95,16 @@ class App extends Component {
       });
   };
 
+  unStakeTokens = () => {
+    this.setState({ loading: true });
+    this.state.tokenFarm.methods
+      .unstakeTokens()
+      .send({ from: this.state.account })
+      .on("transactionHash", (hash) => {
+        this.setState({ loading: false });
+      });
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -120,6 +130,7 @@ class App extends Component {
         dappTokenBalance={this.state.dappTokenBalance}
         stakingBalance={this.state.stakingBalance}
         stakeTokens={this.stakeTokens}
+        unStakeTokens={this.unStakeTokens}
       />
     );
     return (
